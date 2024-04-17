@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexer Tester</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lexer Tester</h1>
+        <textarea id="code" rows="4" cols="50"></textarea>
+        <button onclick="analyzeCode()">Analyze</button>
+        <button onclick="clearCode()">Clear</button> <!-- Botón de limpiar -->
+        <div id="resultContainer"></div>
+    </div>
+    <script>
+        function analyzeCode() {
+            const code = document.getElementById('code').value;
+
+            fetch('/api/v1/lexer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code: code }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error! Status: ${response.status}');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('resultContainer').innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function clearCode() {
+            document.getElementById('code').value = ''; // Limpiar el contenido del área de texto
+        }
+    </script>
+</body>
+
+</html>

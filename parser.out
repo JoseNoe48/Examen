@@ -1,0 +1,380 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ASIGNAR
+    COMA
+    COMDOB
+    COMILLA_SIMPLE
+    COMMENT
+    DISTINTO
+    DIV
+    ENTERO
+    MAYORDER
+    MAYORIGUAL
+    MAYORIZQ
+    MAYORQUE
+    MENORIGUAL
+    MENORQUE
+    MINUSMINUS
+    MODULO
+    MULT
+    NUMERAL
+    PLUSPLUS
+    RESTA
+    SUMA
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> using_statement namespace_definition
+Rule 2     namespace_definition -> NAMESPACE IDENTIFICADOR LLAIZQ class_definition LLADER
+Rule 3     using_statement -> USING SYSTEM PUNTOCOMA
+Rule 4     statement -> print_statement
+Rule 5     class_definition -> CLASS IDENTIFICADOR LLAIZQ main_method LLADER
+Rule 6     main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER
+Rule 7     print_statement -> SYSTEM PUNTO CONSOLE PUNTO WRITELINE PARIZQ CADENA PARDER PUNTOCOMA
+
+Terminals, with rules where they appear
+
+ARGS                 : 6
+ASIGNAR              : 
+CADENA               : 7
+CLASS                : 5
+COMA                 : 
+COMDOB               : 
+COMILLA_SIMPLE       : 
+COMMENT              : 
+CONSOLE              : 7
+CORDER               : 6
+CORIZQ               : 6
+DISTINTO             : 
+DIV                  : 
+ENTERO               : 
+IDENTIFICADOR        : 2 5
+LLADER               : 2 5 6
+LLAIZQ               : 2 5 6
+MAIN                 : 6
+MAYORDER             : 
+MAYORIGUAL           : 
+MAYORIZQ             : 
+MAYORQUE             : 
+MENORIGUAL           : 
+MENORQUE             : 
+MINUSMINUS           : 
+MODULO               : 
+MULT                 : 
+NAMESPACE            : 2
+NUMERAL              : 
+PARDER               : 6 7
+PARIZQ               : 6 7
+PLUSPLUS             : 
+PUNTO                : 7 7
+PUNTOCOMA            : 3 7
+RESTA                : 
+STATIC               : 6
+STRING               : 6
+SUMA                 : 
+SYSTEM               : 3 7
+USING                : 3
+VOID                 : 6
+WRITELINE            : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+class_definition     : 2
+main_method          : 5
+namespace_definition : 1
+print_statement      : 4
+program              : 0
+statement            : 6
+using_statement      : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . using_statement namespace_definition
+    (3) using_statement -> . USING SYSTEM PUNTOCOMA
+
+    USING           shift and go to state 3
+
+    program                        shift and go to state 1
+    using_statement                shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> using_statement . namespace_definition
+    (2) namespace_definition -> . NAMESPACE IDENTIFICADOR LLAIZQ class_definition LLADER
+
+    NAMESPACE       shift and go to state 5
+
+    namespace_definition           shift and go to state 4
+
+state 3
+
+    (3) using_statement -> USING . SYSTEM PUNTOCOMA
+
+    SYSTEM          shift and go to state 6
+
+
+state 4
+
+    (1) program -> using_statement namespace_definition .
+
+    $end            reduce using rule 1 (program -> using_statement namespace_definition .)
+
+
+state 5
+
+    (2) namespace_definition -> NAMESPACE . IDENTIFICADOR LLAIZQ class_definition LLADER
+
+    IDENTIFICADOR   shift and go to state 7
+
+
+state 6
+
+    (3) using_statement -> USING SYSTEM . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 8
+
+
+state 7
+
+    (2) namespace_definition -> NAMESPACE IDENTIFICADOR . LLAIZQ class_definition LLADER
+
+    LLAIZQ          shift and go to state 9
+
+
+state 8
+
+    (3) using_statement -> USING SYSTEM PUNTOCOMA .
+
+    NAMESPACE       reduce using rule 3 (using_statement -> USING SYSTEM PUNTOCOMA .)
+
+
+state 9
+
+    (2) namespace_definition -> NAMESPACE IDENTIFICADOR LLAIZQ . class_definition LLADER
+    (5) class_definition -> . CLASS IDENTIFICADOR LLAIZQ main_method LLADER
+
+    CLASS           shift and go to state 11
+
+    class_definition               shift and go to state 10
+
+state 10
+
+    (2) namespace_definition -> NAMESPACE IDENTIFICADOR LLAIZQ class_definition . LLADER
+
+    LLADER          shift and go to state 12
+
+
+state 11
+
+    (5) class_definition -> CLASS . IDENTIFICADOR LLAIZQ main_method LLADER
+
+    IDENTIFICADOR   shift and go to state 13
+
+
+state 12
+
+    (2) namespace_definition -> NAMESPACE IDENTIFICADOR LLAIZQ class_definition LLADER .
+
+    $end            reduce using rule 2 (namespace_definition -> NAMESPACE IDENTIFICADOR LLAIZQ class_definition LLADER .)
+
+
+state 13
+
+    (5) class_definition -> CLASS IDENTIFICADOR . LLAIZQ main_method LLADER
+
+    LLAIZQ          shift and go to state 14
+
+
+state 14
+
+    (5) class_definition -> CLASS IDENTIFICADOR LLAIZQ . main_method LLADER
+    (6) main_method -> . STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER
+
+    STATIC          shift and go to state 16
+
+    main_method                    shift and go to state 15
+
+state 15
+
+    (5) class_definition -> CLASS IDENTIFICADOR LLAIZQ main_method . LLADER
+
+    LLADER          shift and go to state 17
+
+
+state 16
+
+    (6) main_method -> STATIC . VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER
+
+    VOID            shift and go to state 18
+
+
+state 17
+
+    (5) class_definition -> CLASS IDENTIFICADOR LLAIZQ main_method LLADER .
+
+    LLADER          reduce using rule 5 (class_definition -> CLASS IDENTIFICADOR LLAIZQ main_method LLADER .)
+
+
+state 18
+
+    (6) main_method -> STATIC VOID . MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER
+
+    MAIN            shift and go to state 19
+
+
+state 19
+
+    (6) main_method -> STATIC VOID MAIN . PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER
+
+    PARIZQ          shift and go to state 20
+
+
+state 20
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ . STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER
+
+    STRING          shift and go to state 21
+
+
+state 21
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING . CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER
+
+    CORIZQ          shift and go to state 22
+
+
+state 22
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ . CORDER ARGS PARDER LLAIZQ statement LLADER
+
+    CORDER          shift and go to state 23
+
+
+state 23
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER . ARGS PARDER LLAIZQ statement LLADER
+
+    ARGS            shift and go to state 24
+
+
+state 24
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS . PARDER LLAIZQ statement LLADER
+
+    PARDER          shift and go to state 25
+
+
+state 25
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER . LLAIZQ statement LLADER
+
+    LLAIZQ          shift and go to state 26
+
+
+state 26
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ . statement LLADER
+    (4) statement -> . print_statement
+    (7) print_statement -> . SYSTEM PUNTO CONSOLE PUNTO WRITELINE PARIZQ CADENA PARDER PUNTOCOMA
+
+    SYSTEM          shift and go to state 29
+
+    statement                      shift and go to state 27
+    print_statement                shift and go to state 28
+
+state 27
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement . LLADER
+
+    LLADER          shift and go to state 30
+
+
+state 28
+
+    (4) statement -> print_statement .
+
+    LLADER          reduce using rule 4 (statement -> print_statement .)
+
+
+state 29
+
+    (7) print_statement -> SYSTEM . PUNTO CONSOLE PUNTO WRITELINE PARIZQ CADENA PARDER PUNTOCOMA
+
+    PUNTO           shift and go to state 31
+
+
+state 30
+
+    (6) main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER .
+
+    LLADER          reduce using rule 6 (main_method -> STATIC VOID MAIN PARIZQ STRING CORIZQ CORDER ARGS PARDER LLAIZQ statement LLADER .)
+
+
+state 31
+
+    (7) print_statement -> SYSTEM PUNTO . CONSOLE PUNTO WRITELINE PARIZQ CADENA PARDER PUNTOCOMA
+
+    CONSOLE         shift and go to state 32
+
+
+state 32
+
+    (7) print_statement -> SYSTEM PUNTO CONSOLE . PUNTO WRITELINE PARIZQ CADENA PARDER PUNTOCOMA
+
+    PUNTO           shift and go to state 33
+
+
+state 33
+
+    (7) print_statement -> SYSTEM PUNTO CONSOLE PUNTO . WRITELINE PARIZQ CADENA PARDER PUNTOCOMA
+
+    WRITELINE       shift and go to state 34
+
+
+state 34
+
+    (7) print_statement -> SYSTEM PUNTO CONSOLE PUNTO WRITELINE . PARIZQ CADENA PARDER PUNTOCOMA
+
+    PARIZQ          shift and go to state 35
+
+
+state 35
+
+    (7) print_statement -> SYSTEM PUNTO CONSOLE PUNTO WRITELINE PARIZQ . CADENA PARDER PUNTOCOMA
+
+    CADENA          shift and go to state 36
+
+
+state 36
+
+    (7) print_statement -> SYSTEM PUNTO CONSOLE PUNTO WRITELINE PARIZQ CADENA . PARDER PUNTOCOMA
+
+    PARDER          shift and go to state 37
+
+
+state 37
+
+    (7) print_statement -> SYSTEM PUNTO CONSOLE PUNTO WRITELINE PARIZQ CADENA PARDER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 38
+
+
+state 38
+
+    (7) print_statement -> SYSTEM PUNTO CONSOLE PUNTO WRITELINE PARIZQ CADENA PARDER PUNTOCOMA .
+
+    LLADER          reduce using rule 7 (print_statement -> SYSTEM PUNTO CONSOLE PUNTO WRITELINE PARIZQ CADENA PARDER PUNTOCOMA .)
+
